@@ -1,0 +1,35 @@
+{
+    "message": {
+        "query_graph": {
+            "nodes": {
+                "n0": {
+                    "id": "tmp",
+                    "category": "biolink:Disease"
+                },
+                "n2": {
+                    "category": "biolink:SequenceVariant"
+                },
+                "n3": {
+                    "category": "biolink:Gene"
+                },
+                "n1": {
+                    "category": "biolink:ChemicalSubstance"
+                }
+            },
+            "edges": {
+                "e01": {
+                    "subject": "n0",
+                    "object": "n2"
+                },
+                "e02": {
+                    "subject": "n2",
+                    "object": "n3"
+                },
+                "e03": {
+                    "subject": "n3",
+                    "object": "n1"
+                }
+            }
+        }
+    }
+}
