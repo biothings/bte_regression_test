@@ -23,7 +23,7 @@ jobs:
           pip install -r requirements.txt
           
       - name: test BTE API
-        run: "python src/full_results_quick_demo.py 2"
+        run: "python src/full_results.py 2"
 
       - name: Archive results as artifacts
         uses: actions/upload-artifact@v2
