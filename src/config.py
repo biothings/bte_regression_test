@@ -1,3 +1,3 @@
 SERVER_URL = "http://localhost:3000"
 
-TIMEOUT = 60
+TIMEOUT = 5 * 60
