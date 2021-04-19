@@ -1,6 +1,5 @@
 import csv
 import glob
-import math
 import os
 import pathlib
 import sys
@@ -16,7 +15,7 @@ pathlib.Path(os.path.dirname(full_results_fp)).mkdir(parents=True, exist_ok=True
 output_dir = os.path.join(__location__, '../output')
 pathlib.Path(output_dir).mkdir(parents=True, exist_ok=True)
 
-def get_full_results(limit=math.inf):
+def get_full_results(limit=float('inf')):
     with open(full_results_fp, 'w', newline='') as full_results_f:
         full_results = dict()
 
@@ -28,7 +27,7 @@ def get_full_results(limit=math.inf):
             template_names.add(template_name)
             
             output_fp = os.path.join(output_dir, f'{template_name}.csv')
-            query(output_fp, template_fp)
+            query(output_fp, template_fp, limit)
 
             with open(output_fp, newline='', encoding='utf-8') as output_f:
                     reader = csv.DictReader(output_f, delimiter=',')
@@ -54,6 +53,10 @@ def get_full_results(limit=math.inf):
         for value in full_results.values():
             writer.writerow(value)
 
+
 if __name__ == "__main__":
-    print(sys.argv[1])
-    get_full_results(sys.argv[1])
+    if len(sys.argv) > 1:
+        print(sys.argv[1])
+        get_full_results(int(sys.argv[1]))
+    else:
+        get_full_results()
