@@ -7,7 +7,6 @@ import time
 import os
 import sys
 import json
-import math
 
 def make_request(gard_id, template):
     template['message']['query_graph']['nodes']['n0']['id'] = "GARD:" + gard_id
@@ -28,7 +27,7 @@ def check_if_response_contain_unii(response, unii):
             return True
     return False
 
-def query(output_file, template_path, limit=math.inf):
+def query(output_file, template_path, limit=float('inf')):
     __location__ = os.path.realpath(
     os.path.join(os.getcwd(), os.path.dirname(__file__)))
     with open(os.path.join(__location__, 'data/OOPD-22-02-21.csv'), newline='', encoding='utf-8') as csvfile:
