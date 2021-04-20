@@ -1,0 +1,35 @@
+name: bte_regression_test_quick_demo_action
+on:
+  workflow_dispatch:
+
+jobs:
+  bte_regression_test_quick_demo_job:
+    runs-on: ubuntu-latest
+    services:
+      bte_reasoner_api:
+        image: biothings/bte_reasoner_api
+        ports:
+           - 3000:3000
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          
+      - name: test BTE API
+        run: "python src/full_results.py 2"
+
+      - name: Archive results as artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: bte_regression_test_quick_demo_artifacts
+          path: |
+            output
+            results
+

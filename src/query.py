@@ -27,7 +27,7 @@ def check_if_response_contain_unii(response, unii):
             return True
     return False
 
-def query(output_file, template_path):
+def query(output_file, template_path, limit=float('inf')):
     __location__ = os.path.realpath(
     os.path.join(os.getcwd(), os.path.dirname(__file__)))
     with open(os.path.join(__location__, 'data/OOPD-22-02-21.csv'), newline='', encoding='utf-8') as csvfile:
@@ -39,7 +39,11 @@ def query(output_file, template_path):
                 writer.writeheader()
                 data = csv.reader(csvfile, delimiter=',')
                 next(data)
+                i = 0
                 for row in data:
+                    if i >= limit:
+                        break
+                    i += 1
                     print(row[21])
                     if row[21] and row[22]:
                         api_res = make_request(row[21], template_file)
@@ -54,5 +58,5 @@ def query(output_file, template_path):
 
 
 if __name__ == "__main__":
-    print(sys.argv[1], sys.argv[2]   )
+    print(sys.argv[1], sys.argv[2])
     query(sys.argv[1], sys.argv[2])
